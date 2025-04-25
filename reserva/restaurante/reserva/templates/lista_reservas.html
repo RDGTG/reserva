@@ -1,0 +1,37 @@
+{% extends 'reserva/base.html' %}
+
+{% block title %}Lista de Reservas{% endblock %}
+
+{% block content %}
+    <h1>Lista de Reservas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Pessoas</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.nome }}</td>
+                <td>{{ reserva.data|date:"d/m/Y" }}</td>
+                <td>{{ reserva.horario|time:"H:i" }}</td>
+                <td>{{ reserva.pessoas }}</td>
+                <td>
+                    <a href="{% url 'editar_reserva' reserva.id %}" class="btn btn-secondary">Editar</a>
+                    <a href="{% url 'deletar_reserva' reserva.id %}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Nenhuma reserva encontrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

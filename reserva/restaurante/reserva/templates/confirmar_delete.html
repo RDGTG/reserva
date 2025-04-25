@@ -1,0 +1,17 @@
+{% extends 'reserva/base.html' %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>Confirmar Exclusão</h1>
+        
+        <p>Tem certeza que deseja deletar a reserva de <strong>{{ reserva.nome }}</strong> para o dia <strong>{{ reserva.data|date:"d/m/Y" }}</strong> às <strong>{{ reserva.horario|time:"H:i" }}</strong>?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+            <a href="{% url 'lista_reservas' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

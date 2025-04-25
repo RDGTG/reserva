@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Reservas{% endblock %}</title>
+
+    <style>
+
+        /* Cores principais */
+body {
+    background-color: #f5f9ff; /* Azul bem clarinho */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Container principal */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+.header {
+    background-color: #1e88e5; /* Azul principal */
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Links e botões */
+a {
+    color: #1e88e5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-danger {
+    background-color: #e53935;
+    color: white;
+}
+
+/* Tabela de reservas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1e88e5;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f6ff;
+}
+
+/* Formulários */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #1565c0; /* Azul mais escuro */
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Mensagens */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">App de reserva</div>
+            <nav>
+                <a href="{% url 'lista_reservas' %}" class="btn btn-secondary">Reservas</a>
+                <a href="{% url 'nova_reserva' %}" class="btn btn-primary">Nova Reserva</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>by Rodrigo toga &copy; {% now "Y" %}</p>
+    </footer>
+</body>
+</html>
